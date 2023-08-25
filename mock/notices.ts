@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 const getNotices = (req: Request, res: Response) => {
   res.json({
-    data: [
+    id: [
       {
         id: '000000001',
         avatar:

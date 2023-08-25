@@ -45,7 +45,7 @@ workbox.routing.registerRoute(/\/color.less/, workbox.strategies.networkFirst())
 /** Response to client after skipping waiting with MessageChannel */
 addEventListener('message', (event) => {
   const replyPort = event.ports[0];
-  const message = event.data;
+  const message = event.id;
   if (replyPort && message && message.type === 'skip-waiting') {
     event.waitUntil(
       self.skipWaiting().then(

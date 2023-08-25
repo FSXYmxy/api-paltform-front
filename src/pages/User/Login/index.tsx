@@ -1,26 +1,27 @@
 import Footer from '@/components/Footer';
-import { login } from '@/services/ant-design-pro/api';
 import { getFakeCaptcha } from '@/services/ant-design-pro/login';
+import { userLoginUsingPOST } from '@/services/api-platform-backend/userController';
 import {
-  AlipayCircleOutlined,
-  LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined,
+AlipayCircleOutlined,
+LockOutlined,
+MobileOutlined,
+TaobaoCircleOutlined,
+UserOutlined,
+WeiboCircleOutlined
 } from '@ant-design/icons';
 import {
-  LoginForm,
-  ProFormCaptcha,
-  ProFormCheckbox,
-  ProFormText,
+LoginForm,
+ProFormCaptcha,
+ProFormCheckbox,
+ProFormText
 } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { Helmet, history, useModel } from '@umijs/max';
-import { Alert, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import { Helmet,history,useModel } from '@umijs/max';
+import { Alert,message,Tabs } from 'antd';
+import React,{ useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
+
 const ActionIcons = () => {
   const langClassName = useEmotionCss(({ token }) => {
     return {
@@ -99,27 +100,30 @@ const Login: React.FC = () => {
       });
     }
   };
-  const handleSubmit = async (values: API.LoginParams) => {
+  const handleSubmit = async (values: API.UserLoginRequest) => {
     try {
       // 登录
-      const msg = await login({
+      const res = await userLoginUsingPOST( {
         ...values,
-        type,
       });
-      if (msg.status === 'ok') {
-        const defaultLoginSuccessMessage = '登录成功！';
-        message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
+
+      if (res.data) {
         const urlParams = new URL(window.location.href).searchParams;
-        history.push(urlParams.get('redirect') || '/');
+
+        setTimeout(() => {
+          history.push(urlParams.get('redirect') || '/');
+        }, 100)
+
+        //更新全局状态，设置登录用户的信息
+        setInitialState({
+          loginUser: res.data
+        })
+
         return;
       }
-      console.log(msg);
-      // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
     } catch (error) {
       const defaultLoginFailureMessage = '登录失败，请重试！';
-      console.log(error);
+      // console.log(error);
       message.error(defaultLoginFailureMessage);
     }
   };
@@ -143,15 +147,15 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
-          subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
+          logo={<img alt="logo" src="/mylogo.jpg" />}
+          title="API开放平台"
+          subTitle={'API开放平台 是西苑24栋434最受欢迎的接口调用平台'}
           initialValues={{
             autoLogin: true,
           }}
-          actions={['其他登录方式 :', <ActionIcons key="icons" />]}
+          // actions={['其他登录方式 :', <ActionIcons key="icons" />]}
           onFinish={async (values) => {
-            await handleSubmit(values as API.LoginParams);
+            await handleSubmit(values as API.UserLoginRequest);
           }}
         >
           <Tabs
@@ -163,10 +167,10 @@ const Login: React.FC = () => {
                 key: 'account',
                 label: '账户密码登录',
               },
-              {
-                key: 'mobile',
-                label: '手机号登录',
-              },
+              // {
+              //   key: 'mobile',
+              //   label: '手机号登录',
+              // },
             ]}
           />
 
@@ -176,12 +180,12 @@ const Login: React.FC = () => {
           {type === 'account' && (
             <>
               <ProFormText
-                name="username"
+                name="userAccount"
                 fieldProps={{
                   size: 'large',
                   prefix: <UserOutlined />,
                 }}
-                placeholder={'用户名: admin or user'}
+                placeholder={'用户名: dogmxy'}
                 rules={[
                   {
                     required: true,
@@ -190,12 +194,12 @@ const Login: React.FC = () => {
                 ]}
               />
               <ProFormText.Password
-                name="password"
+                name="userPassword"
                 fieldProps={{
                   size: 'large',
                   prefix: <LockOutlined />,
                 }}
-                placeholder={'密码: ant.design'}
+                placeholder={'密码: 12345678'}
                 rules={[
                   {
                     required: true,

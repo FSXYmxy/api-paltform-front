@@ -95,7 +95,7 @@ function getRule(req: Request, res: Response, u: string) {
     dataSource = dataSource.filter((data) => data?.name?.includes(params.name || ''));
   }
   const result = {
-    data: dataSource,
+    id: dataSource,
     total: tableListDataSource.length,
     success: true,
     pageSize,

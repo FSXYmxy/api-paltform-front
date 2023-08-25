@@ -9,7 +9,7 @@ export async function updatePet(body: API.Pet, options?: { [key: string]: any })
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }
@@ -21,7 +21,7 @@ export async function addPet(body: API.Pet, options?: { [key: string]: any }) {
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }
@@ -64,7 +64,7 @@ export async function updatePetWithForm(
   return request<any>(`/pet/${param0}`, {
     method: 'POST',
     params: { ...queryParams },
-    data: formData,
+    id: formData,
     ...(options || {}),
   });
 }
@@ -116,7 +116,7 @@ export async function uploadFile(
   return request<API.ApiResponse>(`/pet/${param0}/uploadImage`, {
     method: 'POST',
     params: { ...queryParams },
-    data: formData,
+    id: formData,
     requestType: 'form',
     ...(options || {}),
   });

@@ -32,7 +32,7 @@ export default {
   'GET /api/currentUser': (req: Request, res: Response) => {
     if (!getAccess()) {
       res.status(401).send({
-        data: {
+        id: {
           isLogin: false,
         },
         errorCode: '401',
@@ -43,7 +43,7 @@ export default {
     }
     res.send({
       success: true,
-      data: {
+      id: {
         name: 'Serati Ma',
         avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
         userid: '00000001',
@@ -157,7 +157,7 @@ export default {
   },
   'POST /api/login/outLogin': (req: Request, res: Response) => {
     access = '';
-    res.send({ data: {}, success: true });
+    res.send({ id: {}, success: true });
   },
   'POST /api/register': (req: Request, res: Response) => {
     res.send({ status: 'ok', currentAuthority: 'user', success: true });

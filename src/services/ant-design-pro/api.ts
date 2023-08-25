@@ -27,7 +27,7 @@ export async function login(body: API.LoginParams, options?: { [key: string]: an
     headers: {
       'Content-Type': 'application/json',
     },
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }

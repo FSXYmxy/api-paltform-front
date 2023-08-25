@@ -6,7 +6,7 @@ import { request } from '@umijs/max';
 export async function createUser(body: API.User, options?: { [key: string]: any }) {
   return request<any>('/user', {
     method: 'POST',
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }
@@ -36,7 +36,7 @@ export async function updateUser(
   return request<any>(`/user/${param0}`, {
     method: 'PUT',
     params: { ...queryParams },
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }
@@ -62,7 +62,7 @@ export async function createUsersWithArrayInput(
 ) {
   return request<any>('/user/createWithArray', {
     method: 'POST',
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }
@@ -71,7 +71,7 @@ export async function createUsersWithArrayInput(
 export async function createUsersWithListInput(body: API.User[], options?: { [key: string]: any }) {
   return request<any>('/user/createWithList', {
     method: 'POST',
-    data: body,
+    id: body,
     ...(options || {}),
   });
 }
