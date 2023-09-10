@@ -22,13 +22,12 @@ export default {
   //   },
   // },
 
-
   proxy: {
     '/api': {
-      'target': 'http://jsonplaceholder.typicode.com/',
-      'changeOrigin': true,
-      'pathRewrite': { '^/api' : '' },
-    }
+      target: 'http://jsonplaceholder.typicode.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
   },
 
   /**
@@ -43,9 +42,10 @@ export default {
       pathRewrite: { '^': '' },
     },
   },
-  pre: {
+
+  dev: {
     '/api/': {
-      target: 'your pre url',
+      target: 'http://101.34.243.75:8101/api/',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
