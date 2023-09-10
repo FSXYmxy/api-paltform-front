@@ -1,7 +1,7 @@
 {
   "routes": [
     {
-      "src": "/https://api-paltform-front.vercel.app/(.*)",
+      "src": "/front/(.*)",
       "dest": "http://101.34.243.75:8101/api/"
     }
   ]

@@ -11,7 +11,8 @@ interface ResponseStructure {
 
 export const requestConfig: RequestConfig = {
   // baseURL: 'http://localhost:8101',
-  baseURL: 'http://101.34.243.75:8101',
+  // baseURL: 'http://101.34.243.75:8101',
+  baseURL: 'https://api-paltform-front.vercel.app/front',
   withCredentials: true,
 
   // 请求拦截器
