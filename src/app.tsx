@@ -5,9 +5,9 @@ import { LinkOutlined } from '@ant-design/icons';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
+import defaultSettings from '../config/defaultSettings';
 import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDropdown';
 import { requestConfig } from './requestConfig';
-import defaultSettings from "../config/defaultSettings";
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -26,7 +26,6 @@ export async function getInitialState(): Promise<InitialState> {
     if (res.data) {
       state.loginUser = res.data;
     }
-
   } catch (error) {
     history.push(loginPath);
   }
@@ -96,6 +95,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
             disableUrlParams
             enableDarkTheme
             settings={defaultSettings}
+            // settings={initialState?.settings}
             onSettingChange={(settings) => {
               setInitialState((preInitialState) => ({
                 ...preInitialState,
