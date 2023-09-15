@@ -1,9 +1,8 @@
 {
-  "redirects": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "http://101.34.243.75:8101/api/$1",
-      "statusCode": 301
+      "src": "/api/(.*)",
+      "dest": "http://101.34.243.75:8101/api/$1"
     }
   ]
 }
