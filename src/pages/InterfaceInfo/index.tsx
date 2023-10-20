@@ -1,10 +1,9 @@
 import {
   getInterfaceInfoVOByIdUsingGET,
-  invokeInterfaceInfoUsingPOST
+  invokeInterfaceInfoUsingPOST,
 } from '@/services/api-platform-backend/interfaceInfoController';
 import { PageContainer } from '@ant-design/pro-components';
-import {Button, Card, Descriptions, Divider, Form, Input, message} from 'antd';
-import TextArea from 'antd/es/input/TextArea';
+import { Button, Card, Descriptions, Divider, Form, Input, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
@@ -23,7 +22,7 @@ const Index: React.FC = () => {
     setLoading(true);
     try {
       const res = await getInterfaceInfoVOByIdUsingGET({
-        id: Number(params.id),
+        id: String(params.id),
       });
 
       setData(res.data);
@@ -39,7 +38,7 @@ const Index: React.FC = () => {
 
   const onFinish = async (values: any) => {
     if (!params.id) {
-      message.error("接口不存在");
+      message.error('接口不存在');
       return;
     }
     setInvokeLoading(true);
@@ -50,17 +49,31 @@ const Index: React.FC = () => {
       });
       setInvokeRes(res.data);
       message.success('请求成功');
-    } catch (error: any){
-      message.error('操作失败，' + error.message)
+    } catch (error: any) {
+      message.error('操作失败，' + error.message);
     }
     setInvokeLoading(false);
   };
 
+  // /**
+  //  * 尝试将输入框中的内容转换成参数
+  //  * @param values
+  //  */
+  // const transformInput = async (values: any) => {
+  //   let record = JSON.parse(values);
+  //   console.log('begin');
+  //
+  //   console.log(record);
+  //
+  //   console.log('end');
+  //   return record;
+  // };
+
   return (
-    <PageContainer title="查看接口文档">
+    <PageContainer title={data?.name}>
       <Card>
         {data ? (
-          <Descriptions title={data.name} column={1}>
+          <Descriptions column={1} bordered>
             <Descriptions.Item label="接口状态">{data.status ? '开启' : '关闭'}</Descriptions.Item>
             <Descriptions.Item label="描述">{data.description}</Descriptions.Item>
             <Descriptions.Item label="请求地址">{data.url}</Descriptions.Item>
@@ -75,21 +88,21 @@ const Index: React.FC = () => {
           <>接口不存在</>
         )}
       </Card>
-      <Divider/>
+      <Divider />
       <Card>
-        <Form name="invoke" layout={"vertical"} onFinish={onFinish}>
-          <Form.Item label="请求参数" name="userRequestParams">
-            <Input.TextArea />
+        <Form name="invoke" layout={'vertical'} onFinish={onFinish}>
+          <Form.Item label="请求参数" name="params" id="params">
+            <Input.TextArea value={data?.requestParams} id="text" />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ span: 16 }}>
+          <Form.Item wrapperCol={{ span: 16 }} id="submit">
             <Button type="primary" htmlType="submit">
               调用
             </Button>
           </Form.Item>
         </Form>
       </Card>
-      <Divider/>
+      <Divider />
       <Card title="返回结果" loading={invokeLoading}>
         {invokeRes}
       </Card>

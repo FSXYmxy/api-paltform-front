@@ -18,7 +18,7 @@ export default [
     routes: [{ path: '/user/login', component: './User/Login' }],
   },
   {
-    // path: '/admin',
+    path: '/admin',
     icon: 'crown',
     access: 'canAdmin',
     name: '管理页',

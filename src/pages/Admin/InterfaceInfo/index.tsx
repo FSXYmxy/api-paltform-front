@@ -164,6 +164,8 @@ const TableList: React.FC = () => {
       title: 'id',
       dataIndex: 'id',
       valueType: 'index',
+      fixed: "left",
+      width: 50,
     },
     {
       title: '接口名称',
@@ -177,6 +179,10 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      fixed: "left",
+      width: 160,
+      ellipsis: true,
+
     },
     {
       title: '描述',
@@ -190,6 +196,8 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      width: 150,
+      ellipsis: true,
     },
     {
       title: '请求参数',
@@ -203,6 +211,7 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      width: 200
     },
     {
       title: '请求方法',
@@ -216,6 +225,7 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      width: 50,
     },
     {
       title: 'url',
@@ -229,6 +239,8 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      width: 300,
+      ellipsis: true,
     },
     {
       title: '请求头',
@@ -242,6 +254,7 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      width: 300,
     },
     {
       title: '响应头',
@@ -255,6 +268,7 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      width: 300,
     },
     {
       title: '状态',
@@ -289,6 +303,7 @@ const TableList: React.FC = () => {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
+      fixed: "right",
       render: (_, record) => [
         <a
           key="config"
@@ -344,6 +359,7 @@ const TableList: React.FC = () => {
         search={{
           labelWidth: 120,
         }}
+        scroll={{ x: 2160 }}
         toolBarRender={() => [
           <Button
             type="primary"
@@ -378,6 +394,7 @@ const TableList: React.FC = () => {
           }
         }}
         columns={columns}
+        rowKey = {record => record.id}
         rowSelection={{
           onChange: (_, selectedRows) => {
             setSelectedRows(selectedRows);
@@ -398,9 +415,9 @@ const TableList: React.FC = () => {
                 {selectedRowsState.length}
               </a>{' '}
               项 &nbsp;&nbsp;
-              <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo!, 0)} 万
-              </span>
+              {/*<span>*/}
+              {/*  服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.totalNum!, 0)} 次*/}
+              {/*</span>*/}
             </div>
           }
         >

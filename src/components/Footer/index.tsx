@@ -2,20 +2,21 @@
 import { DefaultFooter } from '@ant-design/pro-components';
 import '@umijs/max';
 import React from 'react';
+import {GithubOutlined} from "@ant-design/icons";
 const Footer: React.FC = () => {
-  const defaultMessage = '孟祥越个人出品';
+  const defaultMessage = 'by孟祥越';
   const currentYear = new Date().getFullYear();
   return (
     <DefaultFooter
       style={{
         background: 'none',
       }}
-      copyright={`${currentYear} ${defaultMessage}`}
+      copyright={`${currentYear}${defaultMessage}`}
       links={[
         // {
         //   key: 'API开放平台',
         //   title: 'API开放平台',
-        //   href: 'https://pro.ant.design',
+        //   href: 'http://localhost:8101/api/doc.html',
         //   blankTarget: true,
         // },
         // {
