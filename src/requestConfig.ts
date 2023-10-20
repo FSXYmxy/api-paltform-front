@@ -10,7 +10,8 @@ interface ResponseStructure {
 }
 
 export const requestConfig: RequestConfig = {
-  baseURL : process.env.NODE_ENV === 'vercel' ? 'https://api-paltform-front.vercel.app' : 'http://localhost:8101',
+  baseURL : process.env.NODE_ENV === 'https://api-paltform-front.vercel.app',
+  // baseURL : process.env.NODE_ENV === 'vercel' ? 'https://api-paltform-front.vercel.app' : 'http://localhost:8101',
   withCredentials: true,
 
   // 请求拦截器
